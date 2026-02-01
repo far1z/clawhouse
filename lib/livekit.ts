@@ -4,7 +4,7 @@ let roomServiceClient: RoomServiceClient | null = null;
 
 export function getRoomService(): RoomServiceClient {
   if (!roomServiceClient) {
-    const host = process.env.LIVEKIT_URL;
+    const host = process.env.NEXT_PUBLIC_LIVEKIT_URL;
     const apiKey = process.env.LIVEKIT_API_KEY;
     const apiSecret = process.env.LIVEKIT_API_SECRET;
 
