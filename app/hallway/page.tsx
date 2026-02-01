@@ -2,17 +2,15 @@
 
 import { useEffect, useState, useCallback } from "react";
 import { HallwayFeed } from "@/components/hallway/HallwayFeed";
-import { CreateRoomModal } from "@/components/hallway/CreateRoomModal";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
-import { Plus, RefreshCw } from "lucide-react";
+import { RefreshCw } from "lucide-react";
 import { HALLWAY_POLL_INTERVAL } from "@/lib/constants";
 import type { RoomInfo } from "@/lib/types";
 
 export default function HallwayPage() {
   const [rooms, setRooms] = useState<RoomInfo[]>([]);
   const [loading, setLoading] = useState(true);
-  const [showCreate, setShowCreate] = useState(false);
 
   const fetchRooms = useCallback(async () => {
     try {
@@ -48,27 +46,12 @@ export default function HallwayPage() {
             )}
           </p>
         </div>
-        <div className="flex items-center gap-2">
-          <Button variant="ghost" size="sm" onClick={fetchRooms}>
-            <RefreshCw size={14} />
-          </Button>
-          <Button size="sm" onClick={() => setShowCreate(true)}>
-            <Plus size={14} />
-            New Room
-          </Button>
-        </div>
+        <Button variant="ghost" size="sm" onClick={fetchRooms}>
+          <RefreshCw size={14} />
+        </Button>
       </div>
 
       <HallwayFeed rooms={rooms} loading={loading} />
-
-      <CreateRoomModal
-        isOpen={showCreate}
-        onClose={() => setShowCreate(false)}
-        onCreated={() => {
-          setShowCreate(false);
-          fetchRooms();
-        }}
-      />
     </div>
   );
 }
