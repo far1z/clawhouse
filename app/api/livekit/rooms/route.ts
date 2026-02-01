@@ -59,7 +59,7 @@ export async function POST(req: NextRequest) {
       .select()
       .from(agents)
       .where(eq(agents.apiKey, apiKey))
-      .get();
+      .then(rows => rows[0]);
 
     if (!agent) {
       return NextResponse.json(

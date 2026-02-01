@@ -47,7 +47,7 @@ export async function POST(req: NextRequest) {
   } catch (error: unknown) {
     const message =
       error instanceof Error ? error.message : "Registration failed";
-    if (message.includes("UNIQUE constraint")) {
+    if (message.includes("UNIQUE") || message.includes("duplicate key") || message.includes("unique constraint")) {
       return NextResponse.json(
         { error: "An agent with that name already exists" },
         { status: 409 }

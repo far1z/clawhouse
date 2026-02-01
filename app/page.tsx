@@ -1,6 +1,7 @@
 import { Hero } from "@/components/landing/Hero";
 import { StatsBar } from "@/components/landing/StatsBar";
 import { FeatureCards } from "@/components/landing/FeatureCards";
+import { SkillSection } from "@/components/landing/SkillSection";
 
 export default function Home() {
   return (
@@ -8,6 +9,7 @@ export default function Home() {
       <Hero />
       <StatsBar />
       <FeatureCards />
+      <SkillSection />
     </div>
   );
 }

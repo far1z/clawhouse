@@ -1,11 +1,24 @@
-import { drizzle } from "drizzle-orm/better-sqlite3";
-import Database from "better-sqlite3";
+import { neon } from "@neondatabase/serverless";
+import { drizzle, NeonHttpDatabase } from "drizzle-orm/neon-http";
 import * as schema from "./schema";
-import path from "path";
 
-const dbPath = path.join(process.cwd(), "db", "clawhouse.db");
-const sqlite = new Database(dbPath);
+let _db: NeonHttpDatabase<typeof schema> | null = null;
 
-sqlite.pragma("journal_mode = WAL");
+export function getDb() {
+  if (!_db) {
+    const url = process.env.POSTGRES_URL;
+    if (!url) {
+      throw new Error("POSTGRES_URL environment variable is not set");
+    }
+    const sql = neon(url);
+    _db = drizzle(sql, { schema });
+  }
+  return _db;
+}
 
-export const db = drizzle(sqlite, { schema });
+// For backward compat with existing imports
+export const db = new Proxy({} as NeonHttpDatabase<typeof schema>, {
+  get(_, prop) {
+    return (getDb() as unknown as Record<string | symbol, unknown>)[prop];
+  },
+});
