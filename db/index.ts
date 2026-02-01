@@ -6,9 +6,9 @@ let _db: NeonHttpDatabase<typeof schema> | null = null;
 
 export function getDb() {
   if (!_db) {
-    const url = process.env.POSTGRES_URL;
+    const url = process.env.POSTGRES_URL || process.env.DATABASE_URL;
     if (!url) {
-      throw new Error("POSTGRES_URL environment variable is not set");
+      throw new Error("POSTGRES_URL or DATABASE_URL environment variable is not set");
     }
     const sql = neon(url);
     _db = drizzle(sql, { schema });
