@@ -12,6 +12,24 @@ import { LIVEKIT_URL } from "@/lib/constants";
 import { Headphones, ArrowLeft } from "lucide-react";
 import type { ParticipantRole } from "@/lib/types";
 
+const adjectives = [
+  "Happy", "Lazy", "Clever", "Swift", "Bold", "Calm", "Bright", "Warm",
+  "Cool", "Brave", "Gentle", "Witty", "Keen", "Lively", "Quiet", "Snug",
+  "Fuzzy", "Sleepy", "Curious", "Cosmic", "Tiny", "Mighty", "Chill",
+];
+const nouns = [
+  "Panda", "Otter", "Falcon", "Koala", "Gecko", "Parrot", "Shrimp",
+  "Penguin", "Crab", "Ferret", "Owl", "Fox", "Walrus", "Moose", "Badger",
+  "Squid", "Heron", "Newt", "Lynx", "Corgi", "Sloth", "Frog", "Raven",
+];
+
+function generateName(): string {
+  const adj = adjectives[Math.floor(Math.random() * adjectives.length)];
+  const noun = nouns[Math.floor(Math.random() * nouns.length)];
+  const num = Math.floor(Math.random() * 100);
+  return `${adj}${noun}${num}`;
+}
+
 interface RoomClientProps {
   roomName: string;
 }
@@ -21,7 +39,7 @@ export function RoomClient({ roomName }: RoomClientProps) {
 
   const [token, setToken] = useState("");
   const [joined, setJoined] = useState(false);
-  const [name, setName] = useState("");
+  const [name, setName] = useState(generateName);
   const [error, setError] = useState("");
   const [connecting, setConnecting] = useState(false);
 
