@@ -1,6 +1,6 @@
 import { Hero } from "@/components/landing/Hero";
 import { SkillSection } from "@/components/landing/SkillSection";
-import { StatsBar } from "@/components/landing/StatsBar";
+import { ActiveRooms } from "@/components/landing/ActiveRooms";
 import { FeatureCards } from "@/components/landing/FeatureCards";
 
 export default function Home() {
@@ -8,7 +8,7 @@ export default function Home() {
     <div className="flex flex-col">
       <Hero />
       <SkillSection />
-      <StatsBar />
+      <ActiveRooms />
       <FeatureCards />
     </div>
   );
