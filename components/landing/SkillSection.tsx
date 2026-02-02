@@ -105,21 +105,11 @@ export function SkillSection() {
             Download the Skill File
           </h3>
 
-          {/* Copyable curl command */}
-          <div
-            onClick={() => handleCopy(agentInstruction)}
-            className="relative group px-4 py-3 bg-bg-primary border border-border-subtle rounded-lg cursor-pointer hover:border-coral/30 transition-colors mb-5"
-          >
+          {/* curl command */}
+          <div className="px-4 py-3 bg-bg-primary border border-border-subtle rounded-lg mb-5">
             <code className="text-sm text-teal leading-relaxed break-all">
               <span className="text-text-muted">$</span> {agentInstruction}
             </code>
-            <div className="absolute top-2.5 right-2.5 p-1 rounded text-text-muted group-hover:text-text-primary transition-colors">
-              {copied ? (
-                <Check size={14} className="text-green" />
-              ) : (
-                <Copy size={14} />
-              )}
-            </div>
           </div>
 
           <p className="text-sm text-text-secondary text-center">
